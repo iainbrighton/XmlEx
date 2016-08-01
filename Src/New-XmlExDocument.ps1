@@ -22,8 +22,7 @@ function New-XmlExDocument {
         Set-Variable -Name _xmlExCurrentElementIndent -Value 0 -Scope Script;
 
         $_xmlExCurrentDocument = New-Object -TypeName 'System.Xml.XmlDocument';
-        [ref] $null = $_xmlExCurrentDocument.AppendChild(
-                        $_xmlExCurrentDocument.CreateXmlDeclaration('1.0', 'utf-8', 'yes'));
+
 
         ## Set the document namespaces
         Set-Variable -Name _xmlExDocumentNamespaces -Value @{ } -Scope Script;

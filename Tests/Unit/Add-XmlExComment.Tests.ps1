@@ -7,7 +7,7 @@ $moduleName = 'XmlEx';
 $repoRoot = (Resolve-Path "$PSScriptRoot\..\..").Path;
 Import-Module (Join-Path -Path $repoRoot -ChildPath "$moduleName.psm1") -Force;
 
-Describe 'Src\XmlComment' {
+Describe 'Src\Add-XmlExComment' {
 
     It 'returns [System.Xml.XmlComment] object type' {
 
@@ -36,4 +36,4 @@ Describe 'Src\XmlComment' {
 
     }
 
-} #end describe Src\XmlComment
+} #end describe Src\Add-XmlExComment

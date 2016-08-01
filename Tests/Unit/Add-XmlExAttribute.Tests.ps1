@@ -7,7 +7,7 @@ $moduleName = 'XmlEx';
 $repoRoot = (Resolve-Path "$PSScriptRoot\..\..").Path;
 Import-Module (Join-Path -Path $repoRoot -ChildPath "$moduleName.psm1") -Force;
 
-Describe 'Src\XmlAttribute' {
+Describe 'Src\Add-XmlExAttribute' {
 
     It 'returns [System.Xml.XmlAttribute] object type' {
 
@@ -112,4 +112,4 @@ Describe 'Src\XmlAttribute' {
         } | Should Throw "Cannot add a 'XmlAttribute' to a document without a root element";
     }
 
-} #end describe Src\XmlAttribute
+} #end describe Src\Add-XmlExAttribute

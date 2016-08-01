@@ -3,7 +3,9 @@ param()
 
 Import-Module -Name XmlEx -Force;
 
-$x = XmlDocument { }
+$x = XmlDocument {
+    XmlDeclaration
+}
 
 ## Appending an XmlElement to an exising XmlDocument
 XmlElement -XmlDocument $x -Name 'rootElement' {

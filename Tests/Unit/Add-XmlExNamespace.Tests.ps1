@@ -7,7 +7,7 @@ $moduleName = 'XmlEx';
 $repoRoot = (Resolve-Path "$PSScriptRoot\..\..").Path;
 Import-Module (Join-Path -Path $repoRoot -ChildPath "$moduleName.psm1") -Force;
 
-Describe 'Src\XmlNamespace' {
+Describe 'Src\Add-XmlExNamespace' {
 
     It 'Creates [System.Xml.XmlDocument] with a namespace' {
         $testNamespaceUri = 'http://virtualengine.co.uk/namespace';
@@ -42,4 +42,4 @@ Describe 'Src\XmlNamespace' {
             Should Throw "You cannot call 'XmlNamespace' outside the 'XmlDocument' scope.";
     }
 
-} #end describe Src\XmlNamespace
+} #end describe Src\Add-XmlExNamespace

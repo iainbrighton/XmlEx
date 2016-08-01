@@ -4,6 +4,7 @@ param()
 Import-Module -Name XmlEx -Force;
 
 $x = XmlDocument {
+    XmlDeclaration -Encoding 'utf-8' -Standalone 'yes'
     XmlElement 'rootElement'
 }
 

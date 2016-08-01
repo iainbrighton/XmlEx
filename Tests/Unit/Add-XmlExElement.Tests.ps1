@@ -7,7 +7,7 @@ $moduleName = 'XmlEx';
 $repoRoot = (Resolve-Path "$PSScriptRoot\..\..").Path;
 Import-Module (Join-Path -Path $repoRoot -ChildPath "$moduleName.psm1") -Force;
 
-Describe 'Src\XmlElement' {
+Describe 'Src\Add-XmlExElement' {
 
     It 'returns [System.Xml.XmlElement] object type' {
 
@@ -99,4 +99,4 @@ edElement></TestRootElement}
 
 
 
-} #end describe Src\XmlElement
+} #end describe Src\Add-XmlExElement

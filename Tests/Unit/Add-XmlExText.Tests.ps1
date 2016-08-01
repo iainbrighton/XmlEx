@@ -7,7 +7,7 @@ $moduleName = 'XmlEx';
 $repoRoot = (Resolve-Path "$PSScriptRoot\..\..").Path;
 Import-Module (Join-Path -Path $repoRoot -ChildPath "$moduleName.psm1") -Force;
 
-Describe 'Src\XmlTextNode' {
+Describe 'Src\Add-XmlExText' {
 
     It 'returns [System.Xml.XmlText] object type' {
 
@@ -51,4 +51,4 @@ Describe 'Src\XmlTextNode' {
         } | Should Throw "You cannot call 'XmlText' from within the 'XmlDocument' scope"
     }
 
-} #end describe Src\XmlComment
+} #end describe Src\Add-XmlText

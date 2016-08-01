@@ -7,7 +7,7 @@ $moduleName = 'XmlEx';
 $repoRoot = (Resolve-Path "$PSScriptRoot\..\..").Path;
 Import-Module (Join-Path -Path $repoRoot -ChildPath "$moduleName.psm1") -Force;
 
-Describe 'Src\XmlDocument' {
+Describe 'Src\New-XmlExDocument' {
 
     It 'creates a [System.Xml.XmlDocument] object type' {
 
@@ -34,4 +34,4 @@ Describe 'Src\XmlDocument' {
 
     }
 
-} #end describe Src\XmlDocument
+} #end describe Src\New-XmlExDocument

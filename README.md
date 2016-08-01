@@ -1,16 +1,16 @@
 # XmlEx
 
-XmlEx (XML EXtensions) provides a PowerShell domain-specific language (DSL) to easily create and update XML documents without having to understand or manipulate the underlying [System.Xml.XmlDocument] objects.
-
-XmlEx provides a simple way to
+XmlEx (XML EXtensions) provides a PowerShell domain-specific language (DSL) to easily create and update XML documents without having to understand or manipulate the underlying [System.Xml.XmlDocument] objects. XmlEx provides a simple way to:
 
 * Create and append XML documents in PowerShell
 * Manage XML document namespaces and prefixes
 
 ## Why?
 
-Traditionally, creating XML documents with PowerShell is slow, cumbersome and errorprone. I discovered this whilst developing the [PScribo](http://github.com/iainbrighton/PScribo) module to create Word documents.
-After my eyes started to bleed looking at the code, I decided there had to be an easier way and `XmlEx` is a result of this! Take the following short XML document as an example:
+Traditionally, creating XML documents with PowerShell is slow, cumbersome and errorprone. I discovered this whilst developing the [PScribo](http://github.com/iainbrighton/PScribo) plugin to create Word documents.
+After my eyes started to bleed looking at the code, I decided there had to be an easier way and `XmlEx` is a result of this!
+
+Take the following short XML document as an example:
 ```XML
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <w:document xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main" xmlns:xml="http://www.w3.org/XML/1998/namespace">
@@ -55,6 +55,7 @@ Using `XmlEx`, this can be simply written as:
 
 ```powershell
 XmlDocument {
+    XmlDeclaration -Version '1.0' -Encoding 'utf-8' -Standalone 'yes'
     XmlNamespace -Prefix xml -Uri 'http://www.w3.org/XML/1998/namespace'
     XmlNamespace -Prefix w -Uri 'http://schemas.openxmlformats.org/wordprocessingml/2006/main' -IsDefault
     XmlElement document {
@@ -68,13 +69,13 @@ XmlDocument {
                         XmlAttribute before 160
                         XmlAttribute after 160
                     }
-                }
+                } #pPr
                 XmlElement r {
                     XmlElement t
                 }
-            }
-        }
-    }
+            } #p
+        } #body
+    } #document
 }
 ```
 
@@ -87,4 +88,4 @@ Install-Module -Name XmlEx -Scope CurrentUser
 Import-Module XmlEx
 ```
 
-There are examples in module \Examples folder.
+There are examples in module's \Examples folder.
