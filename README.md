@@ -30,8 +30,8 @@ Take the following short XML document as an example:
 To generate this in PowerShell code requires something similar to this:
 
 ```powershell
-$xmlnsMain = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 $xmlDocument = New-Object -TypeName 'System.Xml.XmlDocument';
+$xmlnsMain = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 [ref] $null = $xmlDocument.AppendChild($xmlDocument.CreateXmlDeclaration('1.0', 'utf-8', 'yes'));
 $documentXml = $xmlDocument.AppendChild($xmlDocument.CreateElement('w', 'document', $xmlnsMain));
 [ref] $null = $xmlDocument.DocumentElement.SetAttribute('xmlns:xml', 'http://www.w3.org/XML/1998/namespace');
@@ -54,28 +54,26 @@ $t = $r.AppendChild($XmlDocument.CreateElement('w', 't', $xmlnsMain));
 Using `XmlEx`, this can be simply written as:
 
 ```powershell
-XmlDocument {
-    XmlDeclaration -Version '1.0' -Encoding 'utf-8' -Standalone 'yes'
+$xmlDocument = XmlDocument {
     XmlNamespace -Prefix xml -Uri 'http://www.w3.org/XML/1998/namespace'
-    XmlNamespace -Prefix w -Uri 'http://schemas.openxmlformats.org/wordprocessingml/2006/main' -IsDefault
-    XmlElement document {
+    XmlElement document -Prefix w -Namespace 'http://schemas.openxmlformats.org/wordprocessingml/2006/main' {
         XmlElement body {
             XmlElement p {
                 XmlElement pPr {
                     XmlElement pStyle {
-                        XmlAttribute val 'MyStyle'
+                        XmlAttribute 'val' 'MyStyle'
                     }
                     XmlElement spacing {
-                        XmlAttribute before 160
-                        XmlAttribute after 160
+                        XmlAttribute 'before' '160'
+                        XmlAttribute 'after' '160'
                     }
-                } #pPr
+                }
                 XmlElement r {
                     XmlElement t
                 }
-            } #p
-        } #body
-    } #document
+            }
+        }
+    }
 }
 ```
 
