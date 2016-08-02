@@ -3,7 +3,13 @@ function Resolve-XmlExNamespace {
     .SYNOPSIS
         Resolves supplied prefix/namespace from the XmlEx namespace manager.
     .DESCRIPTION
-        The Resolve-XmlExNamespace method resolves any defined Xml namespaces.
+        The Resolve-XmlExNamespace method resolves defined Xml namespaces
+        within the XmlEx document.
+
+        Namespaces can be resolved by prefix or Uri, with Prefix being
+        checked first. If no match is found, the namespace Uri is checked.
+        If the namespace is not defined, an entry is not created in the XmlEx
+        namespace manager, but object is still returned.
 #>
     [CmdletBinding()]
     [OutputType([System.Management.Automation.PSCustomObject])]
@@ -36,6 +42,7 @@ function Resolve-XmlExNamespace {
 
         ## If we have no match, try matching on Uri
         if (($PSBoundParameters.ContainsKey('Namespace')) -and ($null -eq $xmlNamespace)) {
+
             foreach ($namespaceKey in $_xmlExDocumentNamespaces.Keys) {
 
                 $ns = $_xmlExDocumentNamespaces[$namespaceKey];

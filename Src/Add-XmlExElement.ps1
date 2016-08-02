@@ -1,7 +1,10 @@
 function Add-XmlExElement {
 <#
     .SYNOPSIS
-        Creates a new XmlEx document element.
+        Adds a XmlElement
+    .DESCRIPTION
+        The Add-XmlExElement cmdlet adds a System.Xml.XmlElement to a XmlEx
+        document or existing System.Xml.XmlDocument object.
 #>
     [CmdletBinding(DefaultParameterSetName = 'XmlEx')]
     [Alias('XmlElement')]

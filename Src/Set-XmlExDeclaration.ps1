@@ -1,31 +1,33 @@
 function Set-XmlExDeclaration {
 <#
     .SYNOPSIS
-        Creates a new XmlEx document namespace.
+        Sets the Xml declaration.
+    .DESCRIPTION
+        The Set-XmlExDeclaration cmdlet set the Xml declaration on a XmlEx document.
 #>
     [CmdletBinding(DefaultParameterSetName = 'XmlEx')]
     [Alias('XmlDeclaration')]
     [OutputType([System.Xml.XmlDeclaration])]
     param (
-        ## Xml namespace prefix
+        ## Xml document 'version' declaration
         [Parameter(ValueFromPipelineByPropertyName, Position = 0, ParameterSetName = 'XmlEx')]
         [Parameter(ValueFromPipelineByPropertyName, Position = 0, ParameterSetName = 'XmlDocument')]
         [ValidateSet('1.0')]
         [System.String] $Version,
 
-        ## Xml namespace uniform resource identifer
+        ## Xml document 'encoding' declaration
         [Parameter(ValueFromPipelineByPropertyName, Position = 1, ParameterSetName = 'XmlEx')]
         [Parameter(ValueFromPipelineByPropertyName, Position = 1, ParameterSetName = 'XmlDocument')]
         [ValidateNotNullOrEmpty()]
         [System.String] $Encoding,
 
-        ## Is the default Xml document namespace, automatically applied to all child elements, attributes and comments etc.
+        ## Xml document 'standalone' declaration
         [Parameter(ValueFromPipelineByPropertyName, ParameterSetName = 'XmlEx')]
         [Parameter(ValueFromPipelineByPropertyName, ParameterSetName = 'XmlDocument')]
         [ValidateSet('Yes','No')]
         [System.String] $Standalone,
 
-        ## Xml document to add the namespace to
+        ## Xml document to add the declaration to
         [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlDocument')]
         [ValidateNotNull()]
         [System.Xml.XmlDocument] $XmlDocument,

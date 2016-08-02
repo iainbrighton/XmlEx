@@ -1,7 +1,10 @@
 function Add-XmlExText {
 <#
     .SYNOPSIS
-        Adds
+        Adds a XmlText node.
+    .DESCRIPTION
+        The Add-XmlExText cmdlet adds a System.Xml.XmlTextNode to a XmlEx
+        document or existing System.Xml.XmlDocument object.
 #>
     [CmdletBinding(DefaultParameterSetName = 'XmlEx')]
     [Alias('XmlText')]

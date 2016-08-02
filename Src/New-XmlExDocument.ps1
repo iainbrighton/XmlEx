@@ -3,7 +3,7 @@ function New-XmlExDocument {
     .SYNOPSIS
         Creates a new XmlEx document.
     .DESCRIPTION
-        The XmlDocument cmdlet
+        The New-XmlExDocument cmdlet creates a new XmlEx document.
 #>
     [CmdletBinding()]
     [Alias('XmlDocument')]
@@ -18,11 +18,9 @@ function New-XmlExDocument {
     process {
 
         Write-Verbose -Message ($localized.CreatingDocument);
-
-        Set-Variable -Name _xmlExCurrentElementIndent -Value 0 -Scope Script;
-
         $_xmlExCurrentDocument = New-Object -TypeName 'System.Xml.XmlDocument';
 
+        Set-Variable -Name _xmlExCurrentElementIndent -Value 0 -Scope Script;
 
         ## Set the document namespaces
         Set-Variable -Name _xmlExDocumentNamespaces -Value @{ } -Scope Script;
@@ -37,16 +35,18 @@ function New-XmlExDocument {
 
         ## We can't add attributes until we have a root element.
         foreach ($namespace in $_xmlExDocumentNamespaces.Keys) {
+
             if ($null -eq $_xmlExCurrentDocument.DocumentElement) {
                 throw ($localized.XmlExNamespaceMissingXmlElementError);
             }
             else {
+
                 $xmlNamespace = $_xmlExDocumentNamespaces[$namespace];
                 Write-Verbose -Message ($localized.AddingDocumentNamespace -f $xmlNamespace.DisplayName);
                 [ref] $null = $_xmlExCurrentDocument.DocumentElement.SetAttribute(
                                                         $namespace, $xmlNamespace.Uri);
             }
-        }
+        } #end foreach namespace
 
         Write-Verbose -Message ($localized.FinalizingDocument);
         Write-Output -InputObject $_xmlExCurrentDocument;

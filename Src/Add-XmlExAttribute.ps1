@@ -1,4 +1,11 @@
 function Add-XmlExAttribute {
+<#
+    .SYNOPSIS
+        Adds a XmlAttribute
+    .DESCRIPTION
+        The Add-XmlExAttribute cmdlet adds a System.Xml.XmlAttribute to a XmlEx
+        document or existing System.Xml.XmlDocument object.
+#>
     [CmdletBinding(DefaultParameterSetName = 'XmlEx')]
     [Alias('XmlAttribute')]
     [OutputType([System.Xml.XmlAttribute])]

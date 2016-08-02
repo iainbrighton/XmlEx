@@ -1,7 +1,10 @@
 function Add-XmlExNamespace {
 <#
     .SYNOPSIS
-        Creates a new XmlEx document namespace.
+        Adds a XmlNamespace
+    .DESCRIPTION
+        The Add-XmlExNamespace cmdlet adds a Xml namespace to an existing XmlEx
+        document namespace manager.
 #>
     [CmdletBinding(DefaultParameterSetName = 'XmlEx')]
     [Alias('XmlNamespace')]

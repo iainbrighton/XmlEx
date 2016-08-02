@@ -1,7 +1,10 @@
 function Add-XmlExComment {
 <#
     .SYNOPSIS
-        Creates a new XmlEx text node.
+        Adds a XmlComment
+    .DESCRIPTION
+        The Add-XmlExComment cmdlet adds a System.Xml.XmlComment to a XmlEx
+        document or existing System.Xml.XmlDocument object.
 #>
     [CmdletBinding(DefaultParameterSetName = 'XmlEx')]
     [Alias('XmlComment')]
