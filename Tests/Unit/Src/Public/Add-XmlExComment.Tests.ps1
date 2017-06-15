@@ -4,7 +4,7 @@ param()
 #requires -Version 3
 
 $moduleName = 'XmlEx';
-$repoRoot = (Resolve-Path "$PSScriptRoot\..\..").Path;
+$repoRoot = (Resolve-Path "$PSScriptRoot\..\..\..\..").Path;
 Import-Module (Join-Path -Path $repoRoot -ChildPath "$moduleName.psm1") -Force;
 
 Describe 'Src\Add-XmlExComment' {

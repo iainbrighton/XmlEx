@@ -20,14 +20,17 @@ function New-XmlExDocument {
         Write-Verbose -Message ($localized.CreatingDocument);
         $_xmlExCurrentDocument = New-Object -TypeName 'System.Xml.XmlDocument';
 
+        $currentWhatIfPreference = $WhatIfPreference;
+        $WhatIfPreference = $false;
         Set-Variable -Name _xmlExCurrentElementIndent -Value 0 -Scope Script;
 
         ## Set the document namespaces
-        Set-Variable -Name _xmlExDocumentNamespaces -Value @{ } -Scope Script;
+        Set-Variable -Name _xmlExDocumentNamespaces -Value @{ } -Scope Script -Confirm:$false -Force;
         Set-Variable -Name _xmlExCurrentNamespace -Value $null -Scope Script;
 
         ## Set the current element to the root
         Set-Variable -Name _xmlExCurrentElement -Value $_xmlExCurrentDocument -Scope Script;
+        $WhatIfPreference = $currentWhatIfPreference;
 
         if ($PSBoundParameters.ContainsKey('ScriptBlock')) {
             [ref] $null = & $ScriptBlock;

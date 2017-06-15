@@ -6,6 +6,7 @@ function Set-XmlExDeclaration {
         The Set-XmlExDeclaration cmdlet set the Xml declaration on a XmlEx document.
 #>
     [CmdletBinding(DefaultParameterSetName = 'XmlEx')]
+    [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSUseShouldProcessForStateChangingFunctions', '')]
     [Alias('XmlDeclaration')]
     [OutputType([System.Xml.XmlDeclaration])]
     param (
