@@ -1,4 +1,8 @@
 function Set-XmlExConfigKeyValue {
+<#
+    .SYNOPSIS
+        Ensures an Xml document contains a Xml element/attribute.    
+#>
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'Path')]
     param (
         # Specifies a path to one or more locations. Wildcards are permitted.

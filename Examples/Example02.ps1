@@ -20,4 +20,4 @@ XmlElement -Name 'appended' -XmlElement $x.document {
 ## Appending an XmlAttribute to an exising XmlElement
 [ref] $null = XmlAttribute -XmlElement $x.document.appended -Name 'myattribute' -Value 'Rubbish!' -verbose
 
-Write-Output $x
+$x | Format-XmlEx

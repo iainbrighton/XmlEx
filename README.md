@@ -55,6 +55,7 @@ Using `XmlEx`, this can be simply written as:
 
 ```powershell
 $xmlDocument = XmlDocument {
+    XmlDeclaration -Encoding 'utf-8' -Standalone 'yes'
     XmlNamespace -Prefix xml -Uri 'http://www.w3.org/XML/1998/namespace'
     XmlElement document -Prefix w -Namespace 'http://schemas.openxmlformats.org/wordprocessingml/2006/main' {
         XmlElement body {

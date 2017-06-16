@@ -14,5 +14,4 @@ XmlElement -XmlDocument $x -Name 'rootElement' {
     }
 } -Verbose
 
-Write-Output $x
-
+$x | Format-XmlEx

@@ -16,4 +16,4 @@ XmlElement -XmlElement $x.SelectSingleNode('/rootElement') -Name 'subElement' {
     }
 } -Verbose
 
-Write-Output $x
+$x | Format-XmlEx

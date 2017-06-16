@@ -19,4 +19,4 @@ $x = XmlDocument {
     }
 } -Verbose
 
-Write-Output $x
+$x | Format-XmlEx
