@@ -13,8 +13,8 @@ Properties {
     $releasePath = (Join-Path -Path $buildPath -ChildPath $moduleName);
     $thumbprint = '76BF0DF07634549D8134763F2776598E15BD1D42';
     $timeStampServer = 'http://timestamp.verisign.com/scripts/timestamp.dll';
-    $exclude = @('.git*', '.vscode', 'Release', 'Tests', 'Build.PSake.ps1', '*.png','readme.md');
-    $signExclude = @('Examples');
+    $exclude = @('.git*', '.vscode', 'Release', 'Tests', 'Build.PSake.ps1', '*.png','readme.md','Docs','DSCResources');
+    $signExclude = @('Examples','DSCResources');
 }
 
 Task Default -Depends Build;
