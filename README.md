@@ -1,3 +1,5 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/od9qahrj937bs1hy?svg=true)](https://ci.appveyor.com/project/iainbrighton/xmlex)
+
 # XmlEx
 
 XmlEx (XML EXtensions) provides a PowerShell domain-specific language (DSL) to easily create and update XML documents without having to understand or manipulate the underlying [System.Xml.XmlDocument] objects. XmlEx provides a simple way to:
