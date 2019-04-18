@@ -17,13 +17,21 @@ Describe 'Style rules' -Tags "Style" {
                         'Docs'
                     );
 
-    Get-ChildItem -Path $repoRoot -Exclude $excludedPaths |
-        ForEach-Object {
-            Get-ChildItem -Path $_.FullName -Recurse |
-                Where-Object { $_ -is [System.IO.FileInfo] } |
-                    ForEach-Object {
+    function TestStylePath {
+        [CmdletBinding()]
+        param (
+            [Parameter(Mandatory, ValueFromPipeline)]
+            [System.String] $Path,
 
-                        It "$($_.FullName) contains no trailing whitespace" {
+            [System.String[]] $Exclude
+        )
+        process
+        {
+            Get-ChildItem -Path $Path -Exclude $Exclude |
+                ForEach-Object {
+                    if ($_ -is [System.IO.FileInfo])
+                    {
+                        It "File '$($_.FullName.Replace($repoRoot,''))' contains no trailing whitespace" {
                             $badLines = @(
                                 $lines = [System.IO.File]::ReadAllLines($_.FullName)
                                 $lineCount = $lines.Count
@@ -35,15 +43,26 @@ Describe 'Style rules' -Tags "Style" {
                                 }
                             )
 
-                            $badLines.Count | Should Be 0
+                            @($badLines).Count | Should Be 0
                         }
 
-                        It "$($_.FullName) end with a newline" {
+                        It "File '$($_.FullName.Replace($repoRoot,''))' ends with a newline" {
 
                             $string = [System.IO.File]::ReadAllText($_.FullName)
                             ($string.Length -gt 0 -and $string[-1] -ne "`n") | Should Be $false
                         }
                     }
+                    elseif ($_ -is [System.IO.DirectoryInfo])
+                    {
+                        TestStylePath -Path $_.FullName -Exclude $Exclude
+                    }
+                }
+        } #end process
+    } #end function
+
+    Get-ChildItem -Path $repoRoot -Exclude $excludedPaths |
+        ForEach-Object {
+            TestStylePath -Path $_.FullName -Exclude $excludedPaths
         }
 
 }
