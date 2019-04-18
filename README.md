@@ -32,9 +32,9 @@ To generate this in PowerShell code requires something similar to this:
 ```powershell
 $xmlDocument = New-Object -TypeName 'System.Xml.XmlDocument';
 $xmlnsMain = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
-[ref] $null = $xmlDocument.AppendChild($xmlDocument.CreateXmlDeclaration('1.0', 'utf-8', 'yes'));
+$null = $xmlDocument.AppendChild($xmlDocument.CreateXmlDeclaration('1.0', 'utf-8', 'yes'));
 $documentXml = $xmlDocument.AppendChild($xmlDocument.CreateElement('w', 'document', $xmlnsMain));
-[ref] $null = $xmlDocument.DocumentElement.SetAttribute('xmlns:xml', 'http://www.w3.org/XML/1998/namespace');
+$null = $xmlDocument.DocumentElement.SetAttribute('xmlns:xml', 'http://www.w3.org/XML/1998/namespace');
 
 $body = $documentXml.AppendChild($xmlDocument.CreateElement('w', 'body', $xmlnsMain));
 
@@ -42,11 +42,11 @@ $p = $body.AppendChild($XmlDocument.CreateElement('w', 'p', $xmlnsMain));
 $pPr = $p.AppendChild($XmlDocument.CreateElement('w', 'pPr', $xmlnsMain));
 
 $pStyle = $pPr.AppendChild($XmlDocument.CreateElement('w', 'pStyle', $xmlnsMain));
-[ref] $null = $pStyle.SetAttribute('val', $xmlnsMain, 'MyStyle');
+$null = $pStyle.SetAttribute('val', $xmlnsMain, 'MyStyle');
 
 $spacing = $pPr.AppendChild($XmlDocument.CreateElement('w', 'spacing', $xmlnsMain));
-[ref] $null = $spacing.SetAttribute('before', $xmlnsMain, 160);
-[ref] $null = $spacing.SetAttribute('after', $xmlnsMain, 160);
+$null = $spacing.SetAttribute('before', $xmlnsMain, 160);
+$null = $spacing.SetAttribute('after', $xmlnsMain, 160);
 
 $r = $p.AppendChild($XmlDocument.CreateElement('w', 'r', $xmlnsMain));
 $t = $r.AppendChild($XmlDocument.CreateElement('w', 't', $xmlnsMain));
@@ -56,21 +56,21 @@ Using `XmlEx`, this can be simply written as:
 ```powershell
 $xmlDocument = XmlDocument {
     XmlDeclaration -Encoding 'utf-8' -Standalone 'yes'
-    XmlNamespace -Prefix xml -Uri 'http://www.w3.org/XML/1998/namespace'
-    XmlElement document -Prefix w -Namespace 'http://schemas.openxmlformats.org/wordprocessingml/2006/main' {
-        XmlElement body {
-            XmlElement p {
-                XmlElement pPr {
-                    XmlElement pStyle {
+    XmlNamespace -Prefix 'xml' -Uri 'http://www.w3.org/XML/1998/namespace'
+    XmlElement document -Prefix 'w' -Namespace 'http://schemas.openxmlformats.org/wordprocessingml/2006/main' {
+        XmlElement 'body' {
+            XmlElement 'p' {
+                XmlElement 'pPr' {
+                    XmlElement 'pStyle' {
                         XmlAttribute 'val' 'MyStyle'
                     }
-                    XmlElement spacing {
+                    XmlElement 'spacing' {
                         XmlAttribute 'before' '160'
                         XmlAttribute 'after' '160'
                     }
                 }
-                XmlElement r {
-                    XmlElement t
+                XmlElement 'r' {
+                    XmlElement 't'
                 }
             }
         }

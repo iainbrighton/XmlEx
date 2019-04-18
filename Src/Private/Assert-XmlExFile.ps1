@@ -2,7 +2,7 @@ function Assert-XmlExFilePath {
 <#
     .SYNOPSIS
         Ensures the target Xml document XPath does or doesn't exist.
-    
+
     .DESCRIPTION
         Ensures that the specified Xml document XPath location does or does not exist. If the path does not exist, the
         cmdlet will create the Xml document XPath.
@@ -23,7 +23,7 @@ function Assert-XmlExFilePath {
         if ($Ensure -eq 'Present') {
 
             if (Test-Path -Path $Path -PathType Leaf) {
-            
+
                 $xmlDocument = New-Object -TypeName System.Xml.XmlDocument;
                 $xmlDocument.Load($Path);
             }
@@ -45,7 +45,7 @@ function Assert-XmlExFilePath {
                 }
 
                 $xmlDocument = New-XmlExDocument -Verbose:$false {
-                    
+
                     ## Ensure we have a declaration
                     Set-XmlExDeclaration
                 }
@@ -64,5 +64,5 @@ function Assert-XmlExFilePath {
             }
         }
 
-    } #end process    
+    } #end process
 } #end function

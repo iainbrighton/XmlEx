@@ -54,7 +54,7 @@ function Assert-XmlExXPath {
                 $warningConfirmationMessage = $localized.ShouldProcessWarning;
                 $warningDescriptionMessage = $localized.ShouldProcessOperationWarning -f 'Append', $xpathNode;
                 if ($Force -or ($PSCmdlet.ShouldProcess($verboseMessage, $warningConfirmationMessage, $warningDescriptionMessage))) {
-                    
+
                     $xmlNode = $currentNode.AppendChild($XmlDocument.CreateElement($xpathNode));
                 }
             }
@@ -71,7 +71,7 @@ function Assert-XmlExXPath {
             $warningConfirmationMessage = $localized.ShouldProcessWarning;
             $warningDescriptionMessage = $localized.ShouldProcessOperationWarning -f 'Append', $attributePath;
             if ($Force -or ($PSCmdlet.ShouldProcess($verboseMessage, $warningConfirmationMessage, $warningDescriptionMessage))) {
-                
+
                 Add-XmlExAttribute -Name $Name -Value $Value -XmlElement $currentNode;
             }
 
@@ -88,14 +88,14 @@ function Assert-XmlExXPath {
 
                     # Add-XmlExText appends the value to the text node?!
                     $currentNode.'#text' = $Value;
-                    
+
                 }
                 else {
 
                     Add-XmlExText -XmlElement $currentNode -Text $Value;
 
                 }
-            
+
             }
 
         }

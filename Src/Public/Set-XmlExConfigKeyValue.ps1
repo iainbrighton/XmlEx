@@ -1,7 +1,7 @@
 function Set-XmlExConfigKeyValue {
 <#
     .SYNOPSIS
-        Ensures an Xml document contains a Xml element/attribute.    
+        Ensures an Xml document contains a Xml element/attribute.
 #>
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'Path')]
     param (
@@ -31,7 +31,7 @@ function Set-XmlExConfigKeyValue {
         ## Specifies the value of the Xml element or Xml attribute to update.
         [Parameter(ValueFromPipelineByPropertyName)]
         [System.String] $Value,
-        
+
         ## Specifies the target is an attribute. Defaults to an element.
         [Parameter(ValueFromPipelineByPropertyName)]
         [System.Management.Automation.SwitchParameter] $IsAttribute,
@@ -48,13 +48,13 @@ function Set-XmlExConfigKeyValue {
 
     }
     process {
-        
+
         if ($PSCmdlet.ParameterSetName -eq 'Path') {
 
             foreach ($filePath in $Path) {
 
                 if (-not $Force) {
-                    
+
                     if (-not (Test-Path -Path $filePath)) {
 
                         $errorMessage = $localized.CannotFindPathError -f $filePath;
@@ -110,7 +110,7 @@ function Set-XmlExConfigKeyValue {
             Write-Verbose -Message ($localized.ProcessingDocument -f $filePath);
             $xmlDocument = Assert-XmlExFilePath -Path $filePath -Ensure 'Present';;
             Assert-XmlExXPath -XmlDocument $xmlDocument @PSBoundParameters;
-            
+
             $verboseMessage = $localized.SavingDocument -f $filePath;
             $warningConfirmationMessage = $localized.ShouldProcessWarning;
             $warningDescriptionMessage = $localized.ShouldProcessOperationWarning -f 'Save', $filePath;
