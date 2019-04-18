@@ -10,6 +10,8 @@ Describe 'Style rules' -Tags "Style" {
                         'Release',
                         '*.png',
                         '*.enc',
+                        '*.dll',
+                        'appveyor-tools',
                         'TestResults.xml',
                         'Tests',
                         'Docs'
