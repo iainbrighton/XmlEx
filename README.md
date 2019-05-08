@@ -9,7 +9,7 @@ XmlEx (XML EXtensions) provides a PowerShell domain-specific language (DSL) to e
 
 ## Why?
 
-Traditionally, creating XML documents with PowerShell is slow, cumbersome and errorprone. I discovered this whilst developing the [PScribo](http://github.com/iainbrighton/PScribo) plugin to create Word documents.
+Traditionally, creating XML documents with PowerShell is slow, cumbersome and error prone. I discovered this whilst developing the [PScribo](http://github.com/iainbrighton/PScribo) plugin to create Word documents.
 After my eyes started to bleed looking at the code, I decided there had to be an easier way and `XmlEx` is a result of this!
 
 Take the following short XML document as an example:

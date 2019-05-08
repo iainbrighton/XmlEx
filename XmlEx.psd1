@@ -1,6 +1,6 @@
 @{
     RootModule = 'XmlEx.psm1';
-    ModuleVersion = '0.9.3';
+    ModuleVersion = '0.9.4';
     GUID = '2a98010d-0e5f-4779-b3b5-5f0b66fea533';
     Author = 'Iain Brighton';
     CompanyName = 'Virtual Engine';

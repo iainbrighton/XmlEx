@@ -12,13 +12,17 @@ function Add-XmlExAttribute {
     param (
         ## Xml attribute name to add
         [Parameter(Mandatory, Position = 0, ParameterSetName = 'XmlEx')]
+        [Parameter(Mandatory, Position = 0, ParameterSetName = 'XmlExNoPrefix')]
         [Parameter(Mandatory, Position = 0, ParameterSetName = 'XmlElement')]
+        [Parameter(Mandatory, Position = 0, ParameterSetName = 'XmlElementNoPrefix')]
         [ValidateNotNullOrEmpty()]
         [System.String] $Name,
 
         ## Xml attribute value to add
         [Parameter(Mandatory, Position = 1, ParameterSetName = 'XmlEx')]
+        [Parameter(Mandatory, Position = 1, ParameterSetName = 'XmlExNoPrefix')]
         [Parameter(Mandatory, Position = 1, ParameterSetName = 'XmlElement')]
+        [Parameter(Mandatory, Position = 1, ParameterSetName = 'XmlElementNoPrefix')]
         [ValidateNotNull()]
         [System.Object] $Value,
 
@@ -36,12 +40,18 @@ function Add-XmlExAttribute {
 
         ## Existing Xml element to add the attribute to
         [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlElement')]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlElementNoPrefix')]
         [ValidateNotNull()]
         [System.Xml.XmlElement] $XmlElement,
 
         ## Returns the create XmlAttrbiute object to the pipeline. By default, this cmdlet does not generate any output.
         [Parameter(ValueFromPipelineByPropertyName)]
-        [System.Management.Automation.SwitchParameter] $PassThru
+        [System.Management.Automation.SwitchParameter] $PassThru,
+
+        ## Suppresses attribute prefix
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlExNoPrefix')]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlElementNoPrefix')]
+        [System.Management.Automation.SwitchParameter] $NoPrefix
     )
     begin {
 
@@ -80,7 +90,12 @@ function Add-XmlExAttribute {
         $paddedMessage = '{0}{1}' -f $padding, ($localized.AddingAttribute -f $attributeDisplayName, $_xmlExCurrentElement.LocalName);
         Write-Verbose -Message $paddedMessage;
 
-        $xmlAttribute = $_xmlExCurrentDocument.CreateAttribute($_xmlExCurrentNamespace.Prefix, $Name, $_xmlExCurrentNamespace.Uri);
+        if ($NoPrefix) {
+            $xmlAttribute = $_xmlExCurrentDocument.CreateAttribute($Name);
+        }
+        else {
+            $xmlAttribute = $_xmlExCurrentDocument.CreateAttribute($_xmlExCurrentNamespace.Prefix, $Name, $_xmlExCurrentNamespace.Uri);
+        }
         $xmlAttribute.InnerText = $Value;
 
         if ($_xmlExCurrentElement -is [System.Xml.XmlDocument]) {

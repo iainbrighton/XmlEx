@@ -4,9 +4,14 @@ Describe 'Linting\FileEncoding' {
     $excludedPaths = @(
                         '.git*',
                         '.vscode',
+                        'Docs',
                         'DSCResources', # We'll take the public DSC resources as-is
                         'Release',
                         '*.png',
+                        '*.enc',
+                        '*.exe',
+                        '*.dll',
+                        'appveyor-tools',
                         'TestResults.xml'
                     );
 

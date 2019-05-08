@@ -101,6 +101,22 @@ Describe 'Src\Add-XmlExAttribute' {
         $xmlDocument.OuterXml | Should Match $expectedNamespace;
     }
 
+    It 'does not add attribute prefix when specified' {
+        $testAttributeName = 'TestAttribute';
+        $testAttributeValue = 'TestAttributeValue';
+        $testElement = 'TestElement';
+        $testPrefix = 've';
+        $testNamespaceUri = 'http://virtualengine.co.uk/namespace'
+
+        $xmlDocument = XmlDocument {
+            XmlNamespace -Prefix $testPrefix -Uri $testNamespaceUri -IsDefault
+            XmlElement -Name $testElement -Namespace $testNamespaceUri {
+                    XmlAttribute -Name $testAttributeName -Value $testAttributeValue -NoPrefix
+            }
+        };
+        $xmlDocument.OuterXml | Should Not Match "$($testprefix):$($testAttributeName)"
+    }
+
     It 'throws when adding attribute when document contains no root element' {
 
         $testAttributeName = 'TestAttribute';

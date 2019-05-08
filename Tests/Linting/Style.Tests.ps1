@@ -1,7 +1,6 @@
 $repoRoot = (Resolve-Path "$PSScriptRoot\..\..").Path;
 
-#Style rules based on Pester v. 4.0.2-rc2
-Describe 'Style rules' -Tags "Style" {
+Describe 'Linting\Style' -Tags "Style" {
 
     $excludedPaths = @(
                         '.git*',

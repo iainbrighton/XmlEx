@@ -87,16 +87,24 @@ Describe 'Src\Add-XmlExElement' {
             }
         }
 
-        $result = XmlElement -Name $testNestedElement -XmlElement $xmlDocument.$testRootElement
+        $null = XmlElement -Name $testNestedElement -XmlElement $xmlDocument.$testRootElement
         $xmlDocument.OuterXml | Should Match $expected;
     }
 
-    <#    Expected: {<?xml version="1.0" encoding="utf-8" standalone="yes"?><TestRootElement><!--RequiredToCoerceAcceleratorToXmlElement--><TestNestedEl
-ement /></TestRootElement>} to match the expression {<TestRootElement><TestNestedElement><!--RequiredToCoerceAcceleratorToXmlElement--></TestNest
-edElement></TestRootElement}
+    It 'does not add element prefix when specified' {
+        $testElement = 'TestElement';
+        $nestedTestElement = 'NestedTestElement';
+        $testNamespaceUri = 'http://virtualengine.co.uk/namespace';
+        $testNamespacePrefix = 'v';
+        $expected = '<{0} />' -f $nestedTestElement;
 
-    } #>
+        $xmlDocument = XmlDocument {
+            XmlElement $testElement -Prefix $testNamespacePrefix -Namespace $testNamespaceUri {
+                XmlElement -Name $nestedTestElement -NoPrefix
+            }
+        }
 
-
+        $xmlDocument.OuterXml | Should Match $expected
+    }
 
 } #end describe Src\Add-XmlExElement

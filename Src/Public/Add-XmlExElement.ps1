@@ -14,6 +14,9 @@ function Add-XmlExElement {
         [Parameter(Mandatory, ValueFromPipelineByPropertyName, Position = 0, ParameterSetName = 'XmlEx')]
         [Parameter(Mandatory, ValueFromPipelineByPropertyName, Position = 0, ParameterSetName = 'XmlElement')]
         [Parameter(Mandatory, ValueFromPipelineByPropertyName, Position = 0, ParameterSetName = 'XmlDocument')]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, Position = 0, ParameterSetName = 'XmlExNoPrefix')]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, Position = 0, ParameterSetName = 'XmlElementNoPrefix')]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, Position = 0, ParameterSetName = 'XmlDocumentNoPrefix')]
         [ValidateNotNullOrEmpty()]
         [System.String] $Name,
 
@@ -21,6 +24,9 @@ function Add-XmlExElement {
         [Parameter(ValueFromPipelineByPropertyName, Position = 1, ParameterSetName = 'XmlElement')]
         [Parameter(ValueFromPipelineByPropertyName, Position = 1, ParameterSetName = 'XmlDocument')]
         [Parameter(ValueFromPipelineByPropertyName, Position = 1, ParameterSetName = 'XmlEx')]
+        [Parameter(ValueFromPipelineByPropertyName, Position = 1, ParameterSetName = 'XmlElementNoPrefix')]
+        [Parameter(ValueFromPipelineByPropertyName, Position = 1, ParameterSetName = 'XmlDocumentNoPrefix')]
+        [Parameter(ValueFromPipelineByPropertyName, Position = 1, ParameterSetName = 'XmlExNoPrefix')]
         [ValidateNotNull()]
         [System.Management.Automation.ScriptBlock] $ScriptBlock,
 
@@ -39,18 +45,26 @@ function Add-XmlExElement {
         [System.String] $Prefix,
 
         ## Existing Xml element to add the element to
-        [Parameter(ValueFromPipelineByPropertyName, ParameterSetName = 'XmlElement')]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlElement')]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlElementNoPrefix')]
         [ValidateNotNull()]
         [System.Xml.XmlElement] $XmlElement,
 
         ## Existing Xml document containing the Xml element to add to
-        [Parameter(ValueFromPipelineByPropertyName, ParameterSetName = 'XmlDocument')]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlDocument')]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlDocumentPrefix')]
         [ValidateNotNull()]
         [System.Xml.XmlDocument] $XmlDocument,
 
         ## Returns the created XmlElement object to the pipeline. By default, this cmdlet does not generate any output.
         [Parameter(ValueFromPipelineByPropertyName)]
-        [System.Management.Automation.SwitchParameter] $PassThru
+        [System.Management.Automation.SwitchParameter] $PassThru,
+
+        ## Suppresses attribute prefix
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlExNoPrefix')]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlElementNoPrefix')]
+        [Parameter(Mandatory, ValueFromPipelineByPropertyName, ParameterSetName = 'XmlDocumentPrefix')]
+        [System.Management.Automation.SwitchParameter] $NoPrefix
     )
     begin {
 
@@ -94,8 +108,12 @@ function Add-XmlExElement {
         $paddedMessage = '{0}{1}' -f $padding, ($localized.AddingElement -f $elementDisplayName, $_xmlExCurrentElement.LocalName);
         Write-Verbose -Message $paddedMessage;
 
-        $xmlElement = $_xmlExCurrentDocument.CreateElement(
-                                    $_xmlExCurrentNamespace.Prefix, $Name, $_xmlExCurrentNamespace.Uri);
+        if ($NoPrefix) {
+            $xmlElement = $_xmlExCurrentDocument.CreateElement($Name);
+        }
+        else {
+            $xmlElement = $_xmlExCurrentDocument.CreateElement($_xmlExCurrentNamespace.Prefix, $Name, $_xmlExCurrentNamespace.Uri);
+        }
 
         $_xmlExCurrentElement = $_xmlExCurrentElement.AppendChild($xmlElement);
 
