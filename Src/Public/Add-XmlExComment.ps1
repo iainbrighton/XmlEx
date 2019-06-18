@@ -21,6 +21,10 @@ function Add-XmlExComment {
         [ValidateNotNull()]
         [System.Xml.XmlElement] $XmlElement,
 
+        ## Adds the comment as the first child of the specified element.
+        [Parameter(ValueFromPipelineByPropertyName)]
+        [System.Management.Automation.SwitchParameter] $Prepend,
+
         ## Returns the XmlComment to the pipeline. By default, this cmdlet does not generate any output.
         [Parameter(ValueFromPipelineByPropertyName)]
         [System.Management.Automation.SwitchParameter] $PassThru
@@ -53,7 +57,12 @@ function Add-XmlExComment {
         Write-Verbose -Message $paddedMessage;
 
         $xmlComment = $_xmlExCurrentDocument.CreateComment($Comment);
-        [ref] $null = $_xmlExCurrentElement.AppendChild($xmlComment);
+        if ($Prepend) {
+            [ref] $null = $_xmlExCurrentElement.PrependChild($xmlComment);
+        }
+        else {
+            [ref] $null = $_xmlExCurrentElement.AppendChild($xmlComment);
+        }
 
         if ($PassThru) {
             Write-Output -InputObject $xmlComment;

@@ -15,7 +15,6 @@ $x = XmlDocument {
             XmlAttribute 'att2' 'value2' -Prefix v
             XmlText 'My body value'
         }
-        #XmlText 'Sub node'
     }
 } -Verbose
 

@@ -1,5 +1,9 @@
 # Change Log #
 
+## Unreleased ##
+
+* Adds -Prepend switch to XmlComment
+
 ## 0.9.4 ##
 
 * Adds -NoPrefix switch parameter to XmlElement and XmlAttribute
