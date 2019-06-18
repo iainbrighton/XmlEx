@@ -1,6 +1,6 @@
 # Change Log #
 
-## Unreleased ##
+## 0.9.5 ##
 
 * Adds -Prepend switch to XmlComment
 
